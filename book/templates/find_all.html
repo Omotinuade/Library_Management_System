@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
+</head>
+<body>
+    <h1>Author's List</h1>
+        {% for author in authors %}
+        <ul class="list-group" >
+            <li class="list-group-item" >{{ author }} </li>
+        </ul>
+    {% endfor %}
+
+</body>
+</html>
