@@ -36,11 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'book',
+    'django_filters',
     'rest_framework',
+    'debug_toolbar',
     'demo',
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -122,3 +125,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'book.User'
+INTERNAL_IPS = [
+
+    "127.0.0.1",
+
+]
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False
+    #     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    #     'PAGE_SIZE': 100
+}

@@ -37,7 +37,7 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
     description = models.CharField(max_length=255, blank=False, null=False)
     isbn = models.CharField(max_length=255, blank=False, null=False)
-    date_added = models.DateTimeField()
+    date_added = models.DateTimeField(blank=True, null=True)
     genre = models.CharField(max_length=3, choices=GENRE_CHOICES)
     language = models.CharField(max_length=1, choices=LANGUAGE_CHOICES)
     price = models.DecimalField(max_digits=6, decimal_places=2)

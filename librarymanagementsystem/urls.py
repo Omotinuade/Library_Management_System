@@ -20,7 +20,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('demo/', include('demo.urls')),
-    path('', include('book.urls'))
+    path('', include('book.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
 ]
 
 admin.site.site_header = 'Tinuade Library System'

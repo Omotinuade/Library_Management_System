@@ -18,10 +18,9 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = ['title', 'description', 'genre', 'language', 'price', 'author', 'book_number', 'discount_price']
 
-    author = serializers.HyperlinkedRelatedField(
-        queryset=Author.objects.all(), view_name='find_all_author'
-    )
-    book_number = serializers.CharField(max_length=10, source="isbn")
+    # author = serializers.HyperlinkedRelatedField(
+    #     queryset=Author.objects.all(), view_name='find_all_authors')
+    book_number = serializers.CharField(max_length=15, source="isbn")
     discount_price = serializers.SerializerMethodField(method_name='calculate')
 
     def calculate(self, book: Book):
