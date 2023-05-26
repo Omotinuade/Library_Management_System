@@ -3,13 +3,14 @@ from django.shortcuts import render, get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
 from rest_framework.decorators import api_view
+from rest_framework.filters import SearchFilter
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
-from book.filters import AuthorFilter
+from book.filters import AuthorFilter, BookFilter
 from book.models import Author, Book
 from book.pagination import DefaultPagination
 from book.serializers import AuthorSerializer, BookSerializer
@@ -142,13 +143,22 @@ class AuthorViewSet(ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     pagination_class = DefaultPagination
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_class = AuthorFilter
+    search_fields = ['first_name']
 
 
 class BookViewSet(ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    pagination_class = DefaultPagination
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_class = BookFilter
+    search_fields = ['title']
 
-    # def get_serializer_context(self):
-    #     return {"request": self.request}
+# class BookViewSet(ModelViewSet):
+#     queryset = Book.objects.all()
+#     serializer_class = BookSerializer
+
+# def get_serializer_context(self):
+#     return {"request": self.request}

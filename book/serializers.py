@@ -4,6 +4,8 @@ from rest_framework import serializers
 
 from book.models import Author, Book
 
+from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
+
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,3 +27,8 @@ class BookSerializer(serializers.ModelSerializer):
 
     def calculate(self, book: Book):
         return book.price - book.price * Decimal(0.1)
+
+
+class UserCreateSerializer(BaseUserCreateSerializer):
+    class Meta(BaseUserCreateSerializer.Meta):
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password']

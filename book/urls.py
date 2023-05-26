@@ -3,7 +3,7 @@ from rest_framework.routers import SimpleRouter, DefaultRouter
 
 from book import views
 
-router = DefaultRouter()
+router = SimpleRouter()
 router.register('authors', views.AuthorViewSet)
 router.register('books', views.BookViewSet)
 

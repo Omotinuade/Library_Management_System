@@ -21,7 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('demo/', include('demo.urls')),
     path('', include('book.urls')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]
 
-admin.site.site_header = 'Tinuade Library System'
+admin.site.site_header = 'EKSU Library System'
