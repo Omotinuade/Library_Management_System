@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.filters import SearchFilter
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -146,6 +147,7 @@ class AuthorViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_class = AuthorFilter
     search_fields = ['first_name']
+    permission_classes = [IsAuthenticated]
 
 
 class BookViewSet(ModelViewSet):
@@ -155,6 +157,7 @@ class BookViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_class = BookFilter
     search_fields = ['title']
+    permission_classes = [IsAdminUser]
 
 # class BookViewSet(ModelViewSet):
 #     queryset = Book.objects.all()

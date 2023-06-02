@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'djoser',
+    'corsheaders',
     'debug_toolbar',
     'demo',
 ]
@@ -47,6 +48,7 @@ MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -126,6 +128,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'book.User'
+
+CORS_ALLOWED_ORIGINS = [
+    'localhost:3000',
+    '127.0.0.1:3000'
+]
 INTERNAL_IPS = [
 
     "127.0.0.1",
@@ -136,12 +143,16 @@ REST_FRAMEWORK = {
     #     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     #     'PAGE_SIZE': 100
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',)
+        'rest_framework_simplejwt.authentication.JWTAuthentication',),
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ]
 
 }
 DJOSER = {
     'SERIALIZERS': {
-        'user_create': 'book.serializers.UserCreateSerializer'
+        'user_create': 'book.serializers.UserCreateSerializer',
+        'current_user': 'book.serializers.UserSerializer'
     }
 }
 SIMPLE_JWT = {

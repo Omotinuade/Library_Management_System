@@ -6,6 +6,8 @@ from book.models import Author, Book
 
 from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
 
+from djoser.serializers import UserSerializer as CurrentUserSerializer
+
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,3 +34,8 @@ class BookSerializer(serializers.ModelSerializer):
 class UserCreateSerializer(BaseUserCreateSerializer):
     class Meta(BaseUserCreateSerializer.Meta):
         fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password']
+
+
+class UserSerializer(CurrentUserSerializer):
+    class Meta(CurrentUserSerializer.Meta):
+        fields = ['id', 'username', 'email', 'first_name', 'last_name']
