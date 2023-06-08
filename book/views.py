@@ -1,4 +1,4 @@
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import send_mail, BadHeaderError, EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 # Create your views here.
@@ -12,6 +12,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser, DjangoModel
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
+from templated_mail.mail import BaseEmailMessage
 
 from book.filters import AuthorFilter, BookFilter
 from book.models import Author, Book
@@ -169,10 +170,29 @@ class BookViewSet(ModelViewSet):
 # def get_serializer_context(self):
 #     return {"request": self.request}
 
+# def send_mail_function(request):
+#     try:
+#         send_mail("Borrowed book", "Your return date is next week else pay 20,000", "oluwa@gmail.com",
+#                   ["ige@gmail.com"])
+#     except BadHeaderError:
+#         pass
+#     return HttpResponse('ok')
+
+# def send_mail_function(request):
+#     try:
+#         message = EmailMessage("Borrowed book", "Your return date is next week else pay 20,000", "oluwa@gmail.com",
+#                                ["ige@gmail.com"])
+#         message.attach_file('book/static/images/dog.jpeg')
+#         message.send()
+#     except BadHeaderError:
+#         pass
+#     return HttpResponse('ok')
+
 def send_mail_function(request):
     try:
-        send_mail("Borrowed book", "Your return date is next week else pay 20,000", "oluwa@gmail.com",
-                  ["ige@gmail.com"])
+        message = BaseEmailMessage(template_name='email.html', context={"name": "Asa"})
+
+        message.send(['tinuade@gmail.com'])
     except BadHeaderError:
         pass
     return HttpResponse('ok')
